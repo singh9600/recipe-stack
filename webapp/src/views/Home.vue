@@ -8,8 +8,12 @@
         <p>3) Save the ones you like for later.</p>
         <p><i class="fas fa-robot"></i>  AI suggestions coming soon!  <i class="fas fa-robot"></i></p>
       </div>
-      <input class="btn btn-primary" type="submit" value="Login">
-      <input class="btn btn-primary" type="submit" value="SignUp">
+      <router-link to="/login">
+        <input class="btn btn-primary" type="submit" value="Login">
+      </router-link>
+      <router-link to="/signup">
+        <input class="btn btn-primary" type="submit" value="SignUp">
+      </router-link>
     </div>
   </div>
 </template>
