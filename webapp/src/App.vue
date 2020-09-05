@@ -10,7 +10,8 @@
 
 <style>
 #app {
-  background-color: #A4D8E2;
+  /* background-color: #f4f1de; */
+  background-color: white;
   height: 100vh;
 }
 </style>

@@ -1,23 +1,56 @@
 <template>
     <div class="profile">
         <div class="val ingredients">
-            <h1>Ingredients</h1>
+            <Ingredients v-bind:ingredients="ingredients" v-on:del-ingredient="deleteIngredient" v-on:add-ingredient="addIngredient" />
         </div>
         <div class="val recipies">
-            <h1>Recipies</h1>
+            <Recipes v-bind:ingredients="ingredients" />
         </div>
     </div>
 </template>
 
 <script>
+import Recipes from '@/components/Recipes.vue';
+import Ingredients from '@/components/Ingredients.vue';
+
 export default {
     name: 'Profile',
     components: {
-
+        Recipes,
+        Ingredients
     },
     data() {
         return {
-            recipies: []
+            recipes: [
+                {
+                    recipeID: "792587"
+                },
+                {
+                    recipeID: "638816"
+                },
+                {
+                    recipeID: "635063"
+                }
+            ],
+            ingredients: [
+                {
+                    name: "Sugar"
+                },
+                {
+                    name: "Apple"
+                },
+                {
+                    name: "Tomato"
+                }
+            ]
+        }
+    },
+    methods: {
+        deleteIngredient(name) {
+            this.ingredients = this.ingredients.filter(ingredient => ingredient.name !== name);
+        },
+        addIngredient(newIngredient) {
+            this.ingredients = [...this.ingredients, newIngredient];
         }
     },
     created() {
@@ -28,22 +61,22 @@ export default {
 <style scoped>
     .profile {
         text-align: center;
-        color: #427286;
+        color: #3D405B;
         font-family: 'Ubuntu';
         display: grid;
         height: 100vh;
-        grid-template-columns: 33% 33% 33% auto;
+        grid-template-columns: 25px 33% 33% 33% 25px;
         grid-template-rows: 5% auto 20px;
     }
     .ingredients {
-        grid-column-start: 1;
-        grid-column-end: 1;
+        grid-column-start: 2;
+        grid-column-end: 2;
         grid-row-start: 2;
         grid-row-end: 2;
     }
     .recipies {
-        grid-column-start: 2;
-        grid-column-end: 2;
+        grid-column-start: 3;
+        grid-column-end: 3;
         grid-row-start: 2;
         grid-row-end: 2;
     }

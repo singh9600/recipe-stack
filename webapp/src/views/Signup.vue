@@ -21,7 +21,7 @@ export default {};
 <style scoped>
   .signup {
     text-align: center;
-    color: #427286;
+    color: #3D405B;
     font-family: 'Ubuntu';
     display: grid;
     height: 100vh;
