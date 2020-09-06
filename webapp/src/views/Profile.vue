@@ -23,23 +23,29 @@ export default {
         return {
             recipes: [
                 {
+                    username: "user1",
                     recipeID: "792587"
                 },
                 {
+                    username: "user1",
                     recipeID: "638816"
                 },
                 {
+                    username: "user1",
                     recipeID: "635063"
                 }
             ],
             ingredients: [
                 {
+                    username: "user1",
                     name: "Sugar"
                 },
                 {
+                    username: "user1",
                     name: "Apple"
                 },
                 {
+                    username: "user1",
                     name: "Tomato"
                 }
             ]
