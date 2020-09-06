@@ -31,6 +31,9 @@ export default {
             this.name = '';
         }
     },
+    created() {
+        console.log(this.ingredients);
+    },
     components: {
         IngredientItem
     },

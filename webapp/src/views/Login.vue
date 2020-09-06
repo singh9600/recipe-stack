@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <form @submit="getRecipe" class="login-form">
+    <form @submit="Login" class="login-form">
       <div class="heading">Login</div>
       <div class="username">
         <input
@@ -38,6 +38,7 @@
 <script>
 import qs from "qs";
 import axios from "axios";
+import md5 from "md5";
 
 export default {
   name: "login",
@@ -60,12 +61,11 @@ export default {
     }
   },
   methods: {
-    getRecipe(e) {
+    Login(e) {
       e.preventDefault();
-      console.log("getRecipe executed");
       var data = qs.stringify({
         username: this.username,
-        password: this.password,
+        password: md5(this.password),
       });
       var config = {
         method: "post",
@@ -83,7 +83,12 @@ export default {
             self.passCheck = "Wrong Username or Password";
           }
           else{
-            self.$router.push("/profile");
+            localStorage.token = response.data.token;
+            self.$router.push({
+              name: "Profile",
+              query: {
+                username: self.username,
+            }});
           }
         })
         .catch(function(error) {
