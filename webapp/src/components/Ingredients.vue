@@ -32,7 +32,7 @@ export default {
         }
     },
     created() {
-        console.log(this.ingredients);
+        console.log(JSON.stringify(this.ingredients));
     },
     components: {
         IngredientItem

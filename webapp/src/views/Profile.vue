@@ -8,7 +8,10 @@
       />
     </div>
     <div class="val recipies">
-      <Recipes v-bind:ingredients="ingredients" />
+      <Recipes
+        v-bind:generatedRecipe="generatedRecipe"
+        v-on:generate-recipe="generateRecipe"
+      />
     </div>
   </div>
 </template>
@@ -28,6 +31,7 @@ export default {
   data() {
     return {
       recipes: [],
+      generatedRecipe: "",
       ingredients: [],
     };
   },
@@ -40,7 +44,7 @@ export default {
       });
       var config = {
         method: "post",
-        url: "http://localhost:3000/getIngredients",
+        url: "https://guarded-eyrie-04910.herokuapp.com/getIngredients",
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/x-www-form-urlencoded",
@@ -51,8 +55,9 @@ export default {
       let self = this;
       axios(config)
         .then(function (response) {
-          //console.log(response.data);
+          console.log(JSON.stringify(response.data));
           self.ingredients = response.data;
+          console.log(JSON.stringify(self.ingredients));
         })
         .catch(function (error) {
           console.log(error);
@@ -68,7 +73,7 @@ export default {
       });
       var config = {
         method: "delete",
-        url: "http://localhost:3000/ingredients/",
+        url: "https://guarded-eyrie-04910.herokuapp.com/ingredients/",
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/x-www-form-urlencoded",
@@ -98,7 +103,7 @@ export default {
       });
       var config = {
         method: "post",
-        url: "http://localhost:3000/ingredients",
+        url: "https://guarded-eyrie-04910.herokuapp.com/ingredients",
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/x-www-form-urlencoded",
@@ -116,6 +121,39 @@ export default {
 
       this.ingredients = [...this.ingredients, newIngredient];
     },
+
+    // generates recipe from spoonacular
+    generateRecipe() {
+        let ingredientStr = "";
+        this.ingredients.forEach(element => {
+            ingredientStr = ingredientStr + element.name + ',+';
+            // console.log(element.name);
+        });
+        ingredientStr = ingredientStr.slice(0, -2);
+        console.log(ingredientStr);
+
+        var data = qs.stringify({
+        ingredientStr: ingredientStr,
+        });
+        var config = {
+            method: "post",
+            url: "https://guarded-eyrie-04910.herokuapp.com/spoonacularRecipe",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            data: data,
+        };
+
+        let self = this;
+        axios(config)
+            .then(function(response) {
+                console.log(JSON.stringify(response.data));
+                self.generatedRecipe = response.data;
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+    },
   },
   created() {
     console.log("started");
@@ -132,7 +170,7 @@ export default {
   font-family: "Ubuntu";
   display: grid;
   height: 100vh;
-  grid-template-columns: 25px 33% 33% 33% 25px;
+  grid-template-columns: 25px 33% 25px 33% 25px 33% 25px;
   grid-template-rows: 5% auto 20px;
 }
 .ingredients {
@@ -142,8 +180,8 @@ export default {
   grid-row-end: 2;
 }
 .recipies {
-  grid-column-start: 3;
-  grid-column-end: 3;
+  grid-column-start: 4;
+  grid-column-end: 4;
   grid-row-start: 2;
   grid-row-end: 2;
 }

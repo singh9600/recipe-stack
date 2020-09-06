@@ -3,10 +3,10 @@
     <form @submit="Signup" class="signup-form">
       <div class="heading">SignUp</div>
       <div class="username">
-        <input type="username" class="form-control" placeholder="username" />
+        <input type="username" v-model="username" class="form-control" placeholder="username" />
       </div>
       <div class="password">
-        <input type="password" class="form-control" placeholder="password" />
+        <input type="password" v-model="password" class="form-control" placeholder="password" />
       </div>
       <div class="signupBtn">
         <input class="btn btn-primary" type="submit" value="SignUp" />
@@ -47,9 +47,13 @@ export default {
         data: data,
       };
 
+      let self = this;
       axios(config)
         .then(function(response) {
           console.log(JSON.stringify(response.data));
+          self.$router.push({
+            name: "Login",
+          });
         })
         .catch(function(error) {
           console.log(error);
