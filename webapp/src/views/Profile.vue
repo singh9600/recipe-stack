@@ -109,30 +109,32 @@ export default {
 
     // adds the particular ingredient to the user's database
     addIngredient(newIngredient) {
-      var token = localStorage.getItem("token");
-      var data = qs.stringify({
-        username: this.$route.query.username,
-        name: newIngredient.name,
-      });
-      var config = {
-        method: "post",
-        url: "https://guarded-eyrie-04910.herokuapp.com/ingredients",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        data: data,
-      };
-
-      axios(config)
-        .then(function(response) {
-          console.log(JSON.stringify(response.data));
-        })
-        .catch(function(error) {
-          console.log(error);
+      if (newIngredient.name) {
+        var token = localStorage.getItem("token");
+        var data = qs.stringify({
+          username: this.$route.query.username,
+          name: newIngredient.name,
         });
+        var config = {
+          method: "post",
+          url: "https://guarded-eyrie-04910.herokuapp.com/ingredients",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          data: data,
+        };
 
-      this.ingredients = [...this.ingredients, newIngredient];
+        axios(config)
+          .then(function(response) {
+            console.log(JSON.stringify(response.data));
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+
+        this.ingredients = [...this.ingredients, newIngredient];
+      }
     },
 
     // generates recipe from spoonacular
@@ -244,8 +246,8 @@ export default {
         .then(function(response) {
           console.log(JSON.stringify(response.data));
           self.savedRecipies = self.savedRecipies.filter(
-          (recipe) => recipe.recipeID !== recipeID
-        );
+            (recipe) => recipe.recipeID !== recipeID
+          );
         })
         .catch(function(error) {
           console.log(error);

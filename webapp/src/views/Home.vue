@@ -7,7 +7,7 @@
         <p>2) View countless randomly generated recipies.</p>
         <p>3) Save the ones you like for later.</p> -->
         <p>View countless randomly generated recipies based on the ingredients you have. Save the ones you like for later.</p>
-        <p><i class="fas fa-robot"></i>  AI suggestions coming soon!  <i class="fas fa-robot"></i></p>
+        <p><i class="fas fa-robot"></i>  More features coming soon!  <i class="fas fa-robot"></i></p>
       </div>
       <router-link to="/login">
         <input class="btn btn-primary btn-lg" type="submit" value="Login">
