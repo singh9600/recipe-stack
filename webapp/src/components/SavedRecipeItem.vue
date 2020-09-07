@@ -1,10 +1,14 @@
 <template>
     <div class="saved-recipe-item">
-        <p>
+        <!-- <p> -->
+            <div class="title">
             {{savedRecipie.title}}
+            </div>
+            <div>
             <button @click="$emit('del-recipe', savedRecipie.recipeID)" class="del"> delete </button>
             <button @click="$emit('view-recipe', savedRecipie.recipeID)" class="view"> view </button>
-        </p>
+            </div>
+        <!-- </p> -->
     </div>
 </template>
 
@@ -23,6 +27,7 @@ export default {
         border-top: 1px #ccc dotted;
         border-bottom-right-radius: 10px;
         border-bottom-left-radius: 10px;
+        display: grid;
     }
     .del {
         background: #E07A5F;
