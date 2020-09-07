@@ -5,8 +5,8 @@ A web app that helps you find recipies based on the ingredients you have. Those 
 **Backend/API repository** : https://github.com/singh9600/recipe-stack-API
 
 ### Tech Stack
-- Backend: NodeJs, ExpressJS\
-- Database: MongoDB\
-- Frontend: VueJS\
+- Backend: NodeJs, ExpressJS
+- Database: MongoDB
+- Frontend: VueJS
 - API for recipies: Spoonacular
 
