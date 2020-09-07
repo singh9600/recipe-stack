@@ -2,9 +2,9 @@
   <div class="recipes">
     <h1>Recipe</h1>
     <RecipeItem v-bind:generatedRecipe="generatedRecipe"/>
-    <form @submit="generateRecipe">
-        <input type="submit" value="Save Recipe" class="btn">
-        <input type="submit" value="New Recipe" class="btn">
+    <form>
+        <input type="submit" v-on:click="saveRecipe" value="Save Recipe" class="btn">
+        <input type="submit" v-on:click="generateRecipe" value="Generate Recipe" class="btn">
     </form>
   </div>
 </template>
@@ -23,6 +23,14 @@ export default {
       generateRecipe(e) {
           e.preventDefault();
           this.$emit('generate-recipe');
+      },
+      saveRecipe(e) {
+        e.preventDefault();
+        const selectedRecipe = {
+          recipeID: this.generatedRecipe.id,
+          title: this.generatedRecipe.title,
+        }
+        this.$emit('save-recipe', selectedRecipe);
       }
   },
   created() {
